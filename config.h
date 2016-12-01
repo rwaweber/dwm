@@ -1,5 +1,5 @@
 /* See LICENSE file for copyright and license details. */
-
+#include "fibonacci.c"
 /* appearance */
 static const char *fonts[] = {
   "ohsnap:size=11"
@@ -53,6 +53,8 @@ static const Layout layouts[] = {
   { "[]=",      tile },    /* first entry is default */
   { "><>",      NULL },    /* no layout function means floating behavior */
   { "[M]",      monocle },
+   	{ "[@]",      spiral },
+ 	{ "[\\]",      dwindle },
 };
 
 /* key definitions */
@@ -76,16 +78,15 @@ static const char *backlightdn[]  = { "xbacklight", "-dec","5",NULL};
 static const char *volup[]  = { "pamixer", "-i","5",NULL};
 static const char *voldn[]  = { "pamixer", "-d","5",NULL};
 
-
 static Key keys[] = {
   /* modifier                     key        function        argument */
   { MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
   { MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd1 } },
-  { MODKEY|ShiftMask,             XK_t, 	   spawn,          {.v = termcmd2 } },
-  { MODKEY|ShiftMask,         	XK_i, 	   spawn,          {.v = backlightup } },
-  { MODKEY|ShiftMask,         	XK_d, 	   spawn,          {.v = backlightdn } },
-  { MODKEY|ShiftMask,         	XK_m, 	   spawn,          {.v = volup } },
-  { MODKEY|ShiftMask,         	XK_l, 	   spawn,          {.v = voldn } },
+  { MODKEY|ShiftMask,             XK_t,      spawn,          {.v = termcmd2 } },
+  { MODKEY|ShiftMask,             XK_i,      spawn,          {.v = backlightup } },
+  { MODKEY|ShiftMask,             XK_d,      spawn,          {.v = backlightdn } },
+  { MODKEY|ShiftMask,             XK_m,      spawn,          {.v = volup } },
+  { MODKEY|ShiftMask,             XK_l,      spawn,          {.v = voldn } },
   { MODKEY,                       XK_b,      togglebar,      {0} },
   { MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
   { MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -99,6 +100,8 @@ static Key keys[] = {
   { MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
   { MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
   { MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+  { MODKEY,                       XK_b,      setlayout,      {.v = &layouts[3]} },
+  { MODKEY,                       XK_d,      setlayout,      {.v = &layouts[4]} },
   { MODKEY,                       XK_space,  setlayout,      {0} },
   { MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
   { MODKEY,                       XK_0,      view,           {.ui = ~0 } },
